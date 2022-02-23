@@ -1,6 +1,6 @@
 <section class="container">
   <h1>Products component</h1>
-  <button class="btn-promise" (click)="callPromise()">Call promise</button>
+  <button data-testid="btn-promise" (click)="callPromise()">Call promise</button>
   <p class="rta">{{ rta }}</p>
   <div class="my-grid">
     <app-product [product]="product" *ngFor="let product of products"></app-product>

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { generateManyProducts } from 'src/app/models/product.mock';
 import { ProductsService } from 'src/app/services/product.service';
-import { asyncData, asyncError, mockObservable, mockPromise } from './../../../../testing';
+import { asyncData, asyncError, mockObservable, mockPromise, query, queryById } from './../../../../testing';
 
 import { ProductsComponent } from './products.component';
 import { ProductComponent } from './../product/product.component';
@@ -109,7 +109,8 @@ describe('ProductsComponent', () => {
       // Arrange
       const mockMsg = 'my mock string';
       valueService.getPromiseValue.and.returnValue(mockPromise(mockMsg));
-      const btnDe = fixture.debugElement.query(By.css('.btn-promise'));
+      // const btnDe = fixture.debugElement.query(By.css('[data-testid="btn-promise"]'));
+      const btnDe = queryById(fixture, 'btn-promise');
       // Act
       btnDe.triggerEventHandler('click', null);
       tick();

@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
+import { queryAllByDirective, queryAll } from '../../../testing';
+
 import { HighlightDirective } from './highlight.directive';
 
 @Component({
@@ -42,8 +44,10 @@ describe('HighlightDirective', () => {
   });
 
   it('should have three highlight elements', () => {
-    const elements = fixture.debugElement.queryAll(By.directive(HighlightDirective));
-    const elementsWithout = fixture.debugElement.queryAll(By.css('*:not([highlight])'));
+    // const elements = fixture.debugElement.queryAll(By.directive(HighlightDirective));
+    const elements = queryAllByDirective(fixture, HighlightDirective);
+    // const elementsWithout = fixture.debugElement.queryAll(By.css('*:not([highlight])'));
+    const elementsWithout = queryAll(fixture, '*:not([highlight])');
     expect(elements.length).toEqual(4);
     expect(elementsWithout.length).toEqual(2);
   });

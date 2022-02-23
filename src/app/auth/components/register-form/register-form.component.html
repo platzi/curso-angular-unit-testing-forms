@@ -1,0 +1,104 @@
+<section class="container">
+  <h5>Register</h5>
+  <form
+    [formGroup]="form"
+    novalidate
+    (ngSubmit)="register($event)"
+    autocomplete="off"
+  >
+    <div>
+      <div class="grid">
+        <label for="name">
+          Full Name
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Full Name"
+            formControlName="name"
+            [attr.aria-invalid]="nameField?.touched ? nameField?.invalid : ''"
+          />
+          <ng-container *ngIf="nameField?.touched && nameField?.errors">
+            <small *ngIf="nameField?.hasError('required')">*Required</small>
+          </ng-container>
+        </label>
+
+        <label for="email">
+          Email address
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email address"
+            formControlName="email"
+            [attr.aria-invalid]="emailField?.touched ? emailField?.invalid : ''"
+          />
+          <ng-container *ngIf="emailField?.touched && emailField?.errors">
+            <small *ngIf="emailField?.hasError('required')">*Required</small>
+            <small *ngIf="emailField?.hasError('email')"
+              >*It's not a email</small
+            >
+          </ng-container>
+        </label>
+      </div>
+
+      <label for="password">
+        Password
+        <input
+          type="password"
+          id="password"
+          name="email"
+          placeholder="Password"
+          formControlName="password"
+          [attr.aria-invalid]="
+            passwordField?.touched ? passwordField?.invalid : ''
+          "
+        />
+        <ng-container *ngIf="passwordField?.touched && passwordField?.errors">
+          <small *ngIf="passwordField?.hasError('required')">*Required</small>
+          <small *ngIf="passwordField?.hasError('minlength')"
+            >*Should be greater 6</small
+          >
+          <small *ngIf="passwordField?.hasError('invalid_password')"
+            >*Should contain numbers</small
+          >
+        </ng-container>
+      </label>
+
+      <label for="confirmPassword">
+        Confirm Password
+        <input
+          type="password"
+          id="confirmPassword"
+          name="email"
+          placeholder="Confirm password"
+          formControlName="confirmPassword"
+          [attr.aria-invalid]="
+            confirmPasswordField?.touched
+              ? form?.hasError('match_password')
+              : ''
+          "
+        />
+        <ng-container *ngIf="confirmPasswordField?.touched && form?.errors">
+          <small *ngIf="form?.hasError('match_password')">*Not matching</small>
+        </ng-container>
+      </label>
+
+      <fieldset>
+        <label for="terms">
+          <input
+            type="checkbox"
+            id="terms"
+            name="terms"
+            formControlName="checkTerms"
+            [attr.aria-invalid]="
+              checkTermsField?.touched ? checkTermsField?.invalid : ''
+            "
+          />
+          I agree to the Terms and Conditions
+        </label>
+      </fieldset>
+      <button type="submit">Register</button>
+    </div>
+  </form>
+</section>

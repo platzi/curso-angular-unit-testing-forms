@@ -1,0 +1,10 @@
+<section class="container">
+  <h5 highlight="yellow">Something Yellow</h5>
+  <h5 highlight>The Default (Gray)</h5>
+  <h5>No Highlight</h5>
+  <input [(ngModel)]="color" [highlight]="color" />
+
+  <h3>{{ 'Texto largo' | reverse }}</h3>
+  <input [(ngModel)]="text" />
+  <p>{{ text | reverse }}</p>
+</section>

@@ -1,4 +1,4 @@
-<h3>Hola, {{ person.name }}</h3>
-<p>Mi altura es {{  person.height }}</p>
-<button class="btn-imc" (click)="calcIMC()">IMC: {{ imc }}</button>
-<button class="btn-person" (click)="onClick()">Select</button>
+<h3 data-testid="title">Hola, {{ person.name }}</h3>
+<p data-testid="text">Mi altura es {{  person.height }}</p>
+<button data-testid="btn-imc" (click)="calcIMC()">IMC: {{ imc }}</button>
+<button data-testid="btn-person" (click)="onClick()">Select</button>

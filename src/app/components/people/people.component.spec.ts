@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PeopleComponent } from './people.component';
 import { PersonComponent } from './../person/person.component';
 import { By } from '@angular/platform-browser';
+import { getText, query, queryById } from './../../../testing';
 
 describe('PeopleComponent', () => {
   let component: PeopleComponent;
@@ -31,17 +32,19 @@ describe('PeopleComponent', () => {
   });
 
   it('should raise selected event when clicked', () => {
-    const button  = fixture.debugElement.query(By.css('app-person .btn-person'));
-    button.triggerEventHandler('click', null);
+    // const button  = fixture.debugElement.query(By.css('app-person .btn-person'));
+    const buttonDe = query(fixture, 'app-person button[data-testid="btn-person"]');
+    buttonDe.triggerEventHandler('click', null);
     fixture.detectChanges();
     expect(component.selectedPerson).toEqual(component.people[0]);
   });
 
   it('should render person when do click', () => {
-    const buttonDe = fixture.debugElement.query(By.css('app-person .btn-person'));
+    const buttonDe = query(fixture, 'app-person button[data-testid="btn-person"]');
     buttonDe.triggerEventHandler('click', null);
     fixture.detectChanges();
-    const liDe = fixture.debugElement.query(By.css('.selectedPerson ul > li'));
+    // const liDe = fixture.debugElement.query(By.css('.selectedPerson ul > li'));
+    const liDe = query(fixture, '.selectedPerson ul > li');
     expect(component.selectedPerson).toEqual(component.people[0]);
     expect(liDe.nativeElement.textContent).toContain(component.selectedPerson.name);
   });

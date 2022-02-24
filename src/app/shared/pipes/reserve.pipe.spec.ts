@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
+import { getText, queryById } from './../../../testing';
+
 import { ReversePipe } from './reverse.pipe';
 
 describe('ReversePipe', () => {
@@ -27,9 +29,9 @@ describe('ReversePipe', () => {
 
 @Component({
   template: `
-    <h5>{{ 'amor' | reverse }}</h5>
-    <input [(ngModel)]="text">
-    <p>{{ text | reverse }}</p>
+    <h5 data-testid="title">{{ 'amor' | reverse }}</h5>
+    <input data-testid="input" [(ngModel)]="text">
+    <p data-testid="text">{{ text | reverse }}</p>
   `
 })
 class HostComponent {
@@ -60,22 +62,25 @@ describe('ReversePipe from HostComponent', () => {
   });
 
   it('should the h5 be "roma"', () => {
-    const h5De = fixture.debugElement.query(By.css('h5'));
-    expect(h5De.nativeElement.textContent).toEqual('roma');
+    // const h5De = fixture.debugElement.query(By.css('h5'));
+    const titleText = getText(fixture, 'title');
+    expect(titleText).toEqual('roma');
   });
 
   it('should apply reverse pipe when typing in the input', () => {
-    const inputDe = fixture.debugElement.query(By.css('input'));
+    const inputDe = queryById(fixture, 'input');
     const inputEl: HTMLInputElement = inputDe.nativeElement;
-    const pDe = fixture.debugElement.query(By.css('p'));
+    // const pDe = fixture.debugElement.query(By.css('p'));
+    const pDebug = queryById(fixture, 'text');
 
-    expect(pDe.nativeElement.textContent).toEqual('');
+    expect(pDebug.nativeElement.textContent).toEqual('');
 
     inputEl.value = 'ANA 2'; // 2 ANA
     inputEl.dispatchEvent(new Event('input'));
     fixture.detectChanges();
 
-    expect(pDe.nativeElement.textContent).toEqual('2 ANA');
+
+    expect(pDebug.nativeElement.textContent).toEqual('2 ANA');
   });
 
 });

@@ -1,7 +1,7 @@
 <section class="container">
   <h1>Products component</h1>
   <button data-testid="btn-promise" (click)="callPromise()">Call promise</button>
-  <p class="rta">{{ rta }}</p>
+  <p data-testid="rta">{{ rta }}</p>
   <div class="my-grid">
     <app-product [product]="product" *ngFor="let product of products"></app-product>
   </div>

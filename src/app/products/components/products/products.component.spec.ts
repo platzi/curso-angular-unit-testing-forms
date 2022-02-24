@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { generateManyProducts } from 'src/app/models/product.mock';
 import { ProductsService } from 'src/app/services/product.service';
-import { asyncData, asyncError, mockObservable, mockPromise, query, queryById } from './../../../../testing';
+import { asyncData, asyncError, mockObservable, mockPromise, query, queryById, getText } from './../../../../testing';
 
 import { ProductsComponent } from './products.component';
 import { ProductComponent } from './../product/product.component';
@@ -115,11 +115,12 @@ describe('ProductsComponent', () => {
       btnDe.triggerEventHandler('click', null);
       tick();
       fixture.detectChanges();
-      const rtaDe = fixture.debugElement.query(By.css('p.rta'));
+      // const textRta = fixture.debugElement.query(By.css('p.rta'));
+      const textRta = getText(fixture, 'rta');
       // Assert
       expect(component.rta).toEqual(mockMsg);
       expect(valueService.getPromiseValue).toHaveBeenCalled();
-      expect(rtaDe.nativeElement.textContent).toEqual(mockMsg);
+      expect(textRta).toContain(mockMsg);
     }));
   })
 

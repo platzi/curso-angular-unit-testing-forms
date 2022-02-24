@@ -37,8 +37,8 @@ export class RegisterFormComponent implements OnInit {
       const value = this.form.value;
       this.usersService.create(value)
       .subscribe((rta) => {
-        console.log(rta);
         // redirect
+        // alert
       });
     } else {
       this.form.markAllAsTouched();

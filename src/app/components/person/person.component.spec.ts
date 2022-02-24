@@ -2,7 +2,7 @@ import { DebugElement, Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Person } from './../../models/person';
-import { getText, queryById } from './../../../testing';
+import { getText, queryById, clickEvent } from './../../../testing';
 
 import { PersonComponent } from './person.component';
 import { first } from 'rxjs/operators';
@@ -94,10 +94,8 @@ describe('PersonComponent', () => {
   it('should display un text with IMC with click', () => {
     // Arrange
     const expectText = 'overweight';
-    const buttonDe = queryById(fixture, 'btn-imc');
-    // const buttonEl = buttonDe.nativeElement;
     // Act
-    buttonDe.triggerEventHandler('click', null);
+    clickEvent(fixture, 'btn-imc', true);
     fixture.detectChanges();
     // Assert
     const textBtn = getText(fixture, 'btn-imc');

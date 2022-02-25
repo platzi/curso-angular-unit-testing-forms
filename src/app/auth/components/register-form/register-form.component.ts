@@ -23,6 +23,7 @@ export class RegisterFormComponent implements OnInit {
       validators: MyValidators.matchPasswords,
     }
   );
+  status: 'loading' | 'success' | 'error' | 'init' = 'init';
 
   constructor(
     private fb: FormBuilder,
@@ -34,11 +35,13 @@ export class RegisterFormComponent implements OnInit {
   register(event: Event) {
     event.preventDefault();
     if (this.form.valid) {
+      this.status = 'loading';
       const value = this.form.value;
       this.usersService.create(value)
       .subscribe((rta) => {
         // redirect
         // alert
+        this.status = 'success';
       });
     } else {
       this.form.markAllAsTouched();

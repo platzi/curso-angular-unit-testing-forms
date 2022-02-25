@@ -38,10 +38,16 @@ export class RegisterFormComponent implements OnInit {
       this.status = 'loading';
       const value = this.form.value;
       this.usersService.create(value)
-      .subscribe((rta) => {
-        // redirect
-        // alert
-        this.status = 'success';
+      .subscribe({
+        next: (rta) => {
+          // redirect
+          // alert
+          this.status = 'success';
+        },
+        error: (error) => {
+          // redict
+          this.status = 'error';
+        }
       });
     } else {
       this.form.markAllAsTouched();

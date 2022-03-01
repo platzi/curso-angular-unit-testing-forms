@@ -3,7 +3,7 @@ import { MyValidators } from './validators';
 import { UsersService } from './../services/user.service';
 import { mockObservable } from 'src/testing';
 
-fdescribe('Tests for MyValidators',() => {
+describe('Tests for MyValidators',() => {
 
   describe('Test for validPassword', () => {
 
@@ -68,7 +68,7 @@ fdescribe('Tests for MyValidators',() => {
 
   describe('Test for validateEmailAsync', () => {
 
-    fit('should return null with valid email', (doneFn) => {
+    it('should return null with valid email', (doneFn) => {
       // Arrange
       const userService: jasmine.SpyObj<UsersService> = jasmine.createSpyObj('UsersService', ['isAvailableByEmail']);
       const control = new FormControl('nico@mail.com');
